@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stopwatch</title>
+    <title>Mini Projects</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -14,13 +14,40 @@
         <h1>Stopwatch</h1>
 
         <div class="display">
-            <span id="time">00:00:00</span>
+            <span id="stopwatch-time">00:00:00</span>
         </div>
 
         <div class="buttons">
-            <button id="start">Start</button>
-            <button id="pause">Pause</button>
-            <button id="reset">Reset</button>
+            <button id="stopwatch-start">Start</button>
+            <button id="stopwatch-pause">Pause</button>
+            <button id="stopwatch-reset">Reset</button>
+        </div>
+    </div>
+
+    <div class="timer-container">
+        <h1>Timer</h1>
+
+        <!-- Inputs numéricos para definir minutos e segundos -->
+        <div class="inputs">
+            <div class="input-group">
+                <input type="number" id="timer-minutes-input" min="0" max="99" value="0">
+                <label for="timer-minutes-input">min</label>
+            </div>
+            <div class="input-group">
+                <input type="number" id="timer-seconds-input" min="0" max="59" value="0">
+                <label for="timer-seconds-input">sec</label>
+            </div>
+        </div>
+
+        <!-- Display do tempo restante -->
+        <div class="display">
+            <span id="timer-time">00:00</span>
+        </div>
+
+        <div class="buttons">
+            <button id="timer-start">Start</button>
+            <button id="timer-pause">Pause</button>
+            <button id="timer-reset">Reset</button>
         </div>
     </div>
 

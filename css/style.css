@@ -9,23 +9,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 40px;
+    padding: 24px;
     background-color: #0d0d0d;
     font-family: 'Courier New', monospace;
 }
 
-.stopwatch-container {
-    width: 90%;
-    max-width: 360px;
-    text-align: center;
-    background-color: #1a1a1a;
-    border-radius: 20px;
-    padding: 40px 24px;
-    border: 1px solid #2a2a2a;
-}
-
 h1 {
     color: #666;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 4px;
     margin-bottom: 32px;
@@ -36,11 +28,77 @@ h1 {
     margin-bottom: 32px;
 }
 
-#time {
-    font-size: 46px;
+#stopwatch-time,
+#timer-time {
+    font-size: 52px;
     color: #ccff00;
     font-weight: bold;
     letter-spacing: 2px;
+    transition: color 0.3s ease;
+}
+
+/* Classe aplicada via JS quando o timer chega a zero */
+#timer-time.finished {
+    color: #ff3b3b;
+    animation: blink 0.6s ease infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Estilo compartilhado dos dois cards */
+.stopwatch-container,
+.timer-container {
+    width: 90%;
+    max-width: 360px;
+    min-height: 500px;
+    text-align: center;
+    background-color: #1a1a1a;
+    border-radius: 20px;
+    padding: 40px 24px;
+    border: 1px solid #2a2a2a;
+}
+
+/* Grupo dos inputs de minutos e segundos, lado a lado (só o timer usa) */
+.inputs {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.input-group input {
+    width: 70px;
+    background-color: #0d0d0d;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #ccff00;
+    font-size: 24px;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    padding: 8px 4px;
+}
+
+.input-group input::-webkit-outer-spin-button,
+.input-group input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-group label {
+    color: #666;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .buttons {
@@ -63,19 +121,19 @@ button:active {
     opacity: 0.6;
 }
 
-#start {
+button[id$="-start"] {
     background-color: #ccff00;
     color: #0d0d0d;
 }
 
-#pause {
+button[id$="-pause"] {
     background-color: #2a2a2a;
     color: #ccff00;
     border: 1px solid #ccff00;
 }
 
-#reset {
+button[id$="-reset"] {
     background-color: transparent;
-    color: #ff5100;
-    border: 1px solid #ff5100;
+    color: #666;
+    border: 1px solid #333;
 }
