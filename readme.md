@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 # Stopwatch
 
 A simple stopwatch built with vanilla HTML, CSS and JavaScript as part of my
@@ -74,4 +72,3 @@ front-end development studies.
 - HTML5
 - CSS3
 - JavaScript
->>>>>>> fabca19 (Update readme.md)

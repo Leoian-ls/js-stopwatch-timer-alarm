@@ -7,6 +7,7 @@
 body {
     min-height: 100vh;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 40px;
@@ -30,7 +31,7 @@ h1 {
 
 #stopwatch-time,
 #timer-time {
-    font-size: 52px;
+    font-size: clamp(36px, 10vw, 52px);
     color: #ccff00;
     font-weight: bold;
     letter-spacing: 2px;
@@ -53,12 +54,17 @@ h1 {
 .timer-container {
     width: 90%;
     max-width: 360px;
-    min-height: 500px;
     text-align: center;
     background-color: #1a1a1a;
     border-radius: 20px;
     padding: 40px 24px;
     border: 1px solid #2a2a2a;
+}
+
+.stopwatch-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* Grupo dos inputs de minutos e segundos, lado a lado (só o timer usa) */
