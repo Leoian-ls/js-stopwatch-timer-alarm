@@ -30,7 +30,8 @@ h1 {
 }
 
 #stopwatch-time,
-#timer-time {
+#timer-time,
+#alarm-time {
     font-size: clamp(36px, 10vw, 52px);
     color: #ccff00;
     font-weight: bold;
@@ -39,7 +40,8 @@ h1 {
 }
 
 /* Classe aplicada via JS quando o timer chega a zero */
-#timer-time.finished {
+#timer-time.finished,
+#alarm-time.finished {
     color: #ff3b3b;
     animation: blink 0.6s ease infinite;
 }
@@ -51,7 +53,8 @@ h1 {
 
 /* Estilo compartilhado dos dois cards */
 .stopwatch-container,
-.timer-container {
+.timer-container,
+.alarm-container {
     width: 90%;
     max-width: 360px;
     text-align: center;
@@ -61,10 +64,31 @@ h1 {
     border: 1px solid #2a2a2a;
 }
 
-.stopwatch-container {
+.stopwatch-container,
+.alarm-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.alarm-input-group {
+    margin-bottom: 32px;
+}
+
+.alarm-input-group input[type="time"] {
+    background-color: #0d0d0d;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #ccff00;
+    font-size: 24px;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    padding: 10px 12px;
+    color-scheme: dark;
+}
+
+.alarm-input-group input[type="time"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
 }
 
 /* Grupo dos inputs de minutos e segundos, lado a lado (só o timer usa) */
@@ -138,7 +162,8 @@ button[id$="-pause"] {
     border: 1px solid #ccff00;
 }
 
-button[id$="-reset"] {
+button[id$="-reset"],
+button[id$="-cancel"] {
     background-color: transparent;
     color: #666;
     border: 1px solid #333;

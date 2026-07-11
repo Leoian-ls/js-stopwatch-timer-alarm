@@ -47,7 +47,7 @@ front-end development studies.
 - HTML5
 - CSS3
 - JavaScript
-=======
+
 # Stopwatch
 
 A simple stopwatch built with vanilla HTML, CSS and JavaScript as part of my

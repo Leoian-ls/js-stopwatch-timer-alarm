@@ -14,29 +14,29 @@ function formatStopwatchTime(seconds) {
     const secs = seconds % 60;
 
     return String(hours).padStart(2, '0') + ':' +
-           String(minutes).padStart(2, '0') + ':' +
-           String(secs).padStart(2, '0');
+        String(minutes).padStart(2, '0') + ':' +
+        String(secs).padStart(2, '0');
 }
 
 function updateStopwatchDisplay() {
     stopwatchDisplay.textContent = formatStopwatchTime(stopwatchTotalSeconds);
 }
 
-stopwatchStartBtn.addEventListener('click', function() {
+stopwatchStartBtn.addEventListener('click', function () {
     if (stopwatchInterval) return;
 
-    stopwatchInterval = setInterval(function() {
+    stopwatchInterval = setInterval(function () {
         stopwatchTotalSeconds++;
         updateStopwatchDisplay();
     }, 1000);
 });
 
-stopwatchPauseBtn.addEventListener('click', function() {
+stopwatchPauseBtn.addEventListener('click', function () {
     clearInterval(stopwatchInterval);
     stopwatchInterval = null;
 });
 
-stopwatchResetBtn.addEventListener('click', function() {
+stopwatchResetBtn.addEventListener('click', function () {
     clearInterval(stopwatchInterval);
     stopwatchInterval = null;
     stopwatchTotalSeconds = 0;
@@ -52,6 +52,7 @@ const timerSecondsInput = document.getElementById('timer-seconds-input');
 const timerStartBtn = document.getElementById('timer-start');
 const timerPauseBtn = document.getElementById('timer-pause');
 const timerResetBtn = document.getElementById('timer-reset');
+const timerSound = document.getElementById('timer-sound');
 
 let timerRemainingSeconds = 0;
 let timerInterval = null;
@@ -79,6 +80,8 @@ timerStartBtn.addEventListener('click', function() {
         if (timerRemainingSeconds === 0) return;
     }
 
+    timerSound.pause();
+    timerSound.currentTime = 0;
     timerDisplay.classList.remove('finished');
 
     timerInterval = setInterval(function() {
@@ -89,6 +92,7 @@ timerStartBtn.addEventListener('click', function() {
             clearInterval(timerInterval);
             timerInterval = null;
             timerDisplay.classList.add('finished');
+            timerSound.play();
         }
     }, 1000);
 });
@@ -103,7 +107,66 @@ timerResetBtn.addEventListener('click', function() {
     timerInterval = null;
     timerRemainingSeconds = 0;
     timerDisplay.classList.remove('finished');
+    timerSound.pause();
+    timerSound.currentTime = 0;
     timerMinutesInput.value = 0;
     timerSecondsInput.value = 0;
     updateTimerDisplay();
+});
+
+
+// ===== ALARM =====
+
+const alarmDisplay = document.getElementById('alarm-time');
+const alarmTimeInput = document.getElementById('alarm-time-input');
+const alarmStartBtn = document.getElementById('alarm-start');
+const alarmCancelBtn = document.getElementById('alarm-cancel');
+const alarmSound = document.getElementById('alarm-sound');
+
+let alarmTargetTime = null; // guarda "HH:MM" escolhido
+let alarmInterval = null;
+
+function triggerAlarm() {
+    clearInterval(alarmInterval);
+    alarmInterval = null;
+    alarmTargetTime = null;
+
+    alarmDisplay.classList.add('finished');
+    alarmSound.play();
+}
+
+function checkAlarm() {
+    const now = new Date();
+    const currentHours = String(now.getHours()).padStart(2, '0');
+    const currentMinutes = String(now.getMinutes()).padStart(2, '0');
+    const currentTime = currentHours + ':' + currentMinutes;
+
+    if (currentTime === alarmTargetTime) {
+        triggerAlarm();
+    }
+}
+
+alarmStartBtn.addEventListener('click', function() {
+    if (!alarmTimeInput.value) return;
+
+    alarmSound.pause();
+    alarmSound.currentTime = 0;
+
+    alarmTargetTime = alarmTimeInput.value;
+    alarmDisplay.textContent = alarmTargetTime;
+    alarmDisplay.classList.remove('finished');
+
+    if (alarmInterval) clearInterval(alarmInterval);
+
+    alarmInterval = setInterval(checkAlarm, 1000);
+});
+
+alarmCancelBtn.addEventListener('click', function() {
+    clearInterval(alarmInterval);
+    alarmInterval = null;
+    alarmTargetTime = null;
+    alarmDisplay.textContent = '--:--';
+    alarmDisplay.classList.remove('finished');
+    alarmSound.pause();
+    alarmSound.currentTime = 0;
 });
